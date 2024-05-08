@@ -6,12 +6,12 @@ import productsRoutes from "./src/routes/products.routes.js";
 
 import { dbConnection } from "./src/database/dbConnection.js";
 
+const server = express();
+
+dotenv.config();
+
 const api = async () => {
-  dotenv.config();
-
   await dbConnection();
-
-  const server = express();
 
   server.use(express.json());
 

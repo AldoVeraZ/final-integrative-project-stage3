@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 export const dbConnection = async () => {
   try {
     const mongoDB = await mongoose.connect(process.env.DB_URL_CONNECTION, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      /*  useNewUrlParser: true,
+      useUnifiedTopology: true, */
     });
     console.log(
       "Se conectó satisfactoriamente a la base de datos de: ",
