@@ -14,9 +14,9 @@ const api = async () => {
   await dbConnection();
 
   server.use(express.json());
-
   server.use(cors());
 
+  server.use("/public", express.static("./temp/imgs"));
   server.use("/api/products", productsRoutes);
 
   server.listen(process.env.PORT, () =>

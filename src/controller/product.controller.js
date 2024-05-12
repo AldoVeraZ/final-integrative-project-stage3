@@ -1,9 +1,20 @@
 import { Products } from "../models/Products.js";
 
 export const createProduct = async (req, res) => {
-  const { body } = req;
+  const { body, file } = req;
   try {
-    const product = await Products.create(body);
+    if (!file) {
+      return res.status(400).json({
+        ok: false,
+        msg: "La foto es obligatoria.",
+      });
+    }
+    /*  console.log(body);
+    console.log(file.filename); */
+    const product = await Products.create({
+      ...body,
+      imgUrl: `${process.env.BASE_URL}/public/${file.filename}`,
+    });
 
     if (!product) {
       return res.status(400).json({
@@ -19,6 +30,22 @@ export const createProduct = async (req, res) => {
     });
   } catch (error) {
     console.log("Ha habido un error al crear el producto");
+    res.status(500).json({
+      ok: false,
+      msg: "Ha habido un error con el servidor",
+    });
+  }
+};
+
+export const getProducts = async (req, res) => {
+  try {
+    const products = await Products.find();
+    res.json({
+      ok: true,
+      products,
+    });
+  } catch (error) {
+    console.log("Ha habido un error al obtener el productos");
     res.status(500).json({
       ok: false,
       msg: "Ha habido un error con el servidor",
