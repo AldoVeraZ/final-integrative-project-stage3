@@ -1,8 +1,12 @@
+import fs from "fs";
+
 import { Products } from "../models/Products.js";
 
 export const createProduct = async (req, res) => {
   const { body, file } = req;
   try {
+    const imageBuffer = fs.readFileSync(`/temp/imgs/${file.filename}`);
+    console.log(imageBuffer);
     if (!file) {
       return res.status(400).json({
         ok: false,
