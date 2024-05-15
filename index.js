@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 
 import productsRoutes from "./src/routes/products.routes.js";
 
+import imagesRoutes from "./src/routes/images.routes.js";
+
 import { dbConnection } from "./src/database/dbConnection.js";
 
 const server = express();
@@ -17,6 +19,9 @@ const api = async () => {
   server.use(cors());
 
   server.use("/public", express.static("./temp/imgs"));
+
+  server.use("/images", imagesRoutes);
+
   server.use("/api/products", productsRoutes);
 
   server.listen(process.env.PORT, () =>
