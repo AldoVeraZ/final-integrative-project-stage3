@@ -5,7 +5,7 @@ export const getImage = async (req, res) => {
   /* console.log(idImage); */
   try {
     const image = await Images.findById(idImage);
-    console.log(image);
+    /*     console.log(image); */
     /* reconstruir l imagen */
     const imgBuffer = Buffer.from(image.img.data);
 
