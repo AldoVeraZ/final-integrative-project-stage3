@@ -71,8 +71,14 @@ export const createProduct = async (req, res) => {
 };
 
 export const getProducts = async (req, res) => {
+  const { search } = req.query;
+  console.log(search);
+
   try {
-    const products = await Products.find();
+    const searchBy = search ? { name: new RegExp(search, "i") } : undefined;
+
+    /*  const products = await Products.find({ name: new RegExp(search) }); */
+    const products = await Products.find(searchBy);
     res.json({
       ok: true,
       products,
