@@ -1,4 +1,4 @@
-import { Images } from "../models/Images.js";
+import { Images } from "../models/images.js";
 
 export const getImage = async (req, res) => {
   const { idImage } = req.params;
