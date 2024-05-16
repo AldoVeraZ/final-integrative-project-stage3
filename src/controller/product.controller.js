@@ -72,7 +72,7 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   const { search } = req.query;
-  console.log(search);
+  /*   console.log(search); */
 
   try {
     const searchBy = search ? { name: new RegExp(search, "i") } : undefined;
