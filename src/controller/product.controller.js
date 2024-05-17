@@ -1,7 +1,7 @@
 import fs from "fs";
 
 import { Products } from "../models/Products.js";
-import { Images } from "../models/images.js";
+import { Images } from "../models/Images.js";
 
 export const createProduct = async (req, res) => {
   const { body, file } = req;
