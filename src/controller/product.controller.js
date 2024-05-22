@@ -75,10 +75,13 @@ export const getProducts = async (req, res) => {
   /*   console.log(search); */
 
   try {
-    const searchBy = search ? { name: new RegExp(search, "i") } : undefined;
+    const searchBy = search ? { name: new RegExp(search, "i") } : {};
 
     /*  const products = await Products.find({ name: new RegExp(search) }); */
-    const products = await Products.find(searchBy);
+    const products = await Products.find({
+      ...searchBy,
+      deletedAt: { $in: [null, undefined] },
+    });
     res.json({
       ok: true,
       products,
@@ -97,7 +100,7 @@ export const editProduct = async (req, res) => {
   const { body, file } = req;
   try {
     const product = await Products.findById(id);
-    if (!product) {
+    if (!product || product.deletedAt) {
       return res.status(404).json({
         ok: false,
         msg: "Producto o id inválido!",
@@ -149,6 +152,38 @@ export const editProduct = async (req, res) => {
       ok: true,
       product: productUpdated,
       msg: "El producto se actualizo correctamente!.",
+    });
+  } catch (error) {
+    console.log("Ha habido un error al editar el producto");
+    res.status(500).json({
+      ok: false,
+      msg: "Ha habido un error con el servidor",
+    });
+  }
+};
+
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Products.findById(id);
+
+    if (!product || product.deletedAt) {
+      return res.status(404).json({
+        ok: false,
+        msg: "El producto no fue encontrado.",
+      });
+    }
+
+    await Products.findByIdAndUpdate(
+      id,
+      { deletedAt: new Date() },
+      { new: true }
+    );
+
+    res.json({
+      ok: true,
+      msg: "Producto eliminado correctamente!",
     });
   } catch (error) {
     console.log("Ha habido un error al editar el producto");
