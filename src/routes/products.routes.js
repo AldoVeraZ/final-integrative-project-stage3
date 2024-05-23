@@ -16,5 +16,6 @@ route
   .get("/", getProducts)
   .put("/edit/:id", upload.single("image"), editProduct)
   .delete("/delete/:id", deleteProduct);
+/* aca van las validaciones de express validator */
 
 export default route;
