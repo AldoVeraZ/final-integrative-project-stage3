@@ -1,7 +1,8 @@
 import express from "express";
-import { createMessage } from "../controller/messagesController.js";
 import { body } from "express-validator";
+
 import { validationErrorResponse } from "../middlewares/validateResponse.js";
+import { createMessage } from "../controller/messagesController.js";
 
 const route = express.Router();
 
