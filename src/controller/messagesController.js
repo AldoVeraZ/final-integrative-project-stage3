@@ -15,6 +15,8 @@ export const createMessage = async (req, res) => {
       ok: true,
       msg: "El mensaje ha sido enviado correctamente.",
     });
+
+    /* vincular en este controlador algun tipo de api que manejie protocolos smpt para el envio de emails */
   } catch (error) {
     console.log("Ha habido un error al editar el producto.");
     res.status(500).json({
