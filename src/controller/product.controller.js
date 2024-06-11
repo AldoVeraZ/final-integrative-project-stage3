@@ -71,20 +71,19 @@ export const createProduct = async (req, res) => {
 };
 
 export const getProducts = async (req, res) => {
-  const { search } = req.query;
-  /*   console.log(search); */
+  const { search } = req.query; // Obtenemos el término de búsqueda de los parámetros de consulta
 
   try {
-    const searchBy = search ? { name: new RegExp(search, "i") } : {};
+    const searchBy = search ? { name: new RegExp(search, "i") } : {}; // Si hay un término de búsqueda, creamos una expresión regular
 
-    /*  const products = await Products.find({ name: new RegExp(search) }); */
     const products = await Products.find({
       ...searchBy,
       deletedAt: { $in: [null, undefined] },
-    });
+    }); // Buscamos productos que coincidan con el término de búsqueda
+
     res.json({
       ok: true,
-      products,
+      products, // Devolvemos los productos encontrados
     });
   } catch (error) {
     console.log("Ha habido un error al obtener el productos");
