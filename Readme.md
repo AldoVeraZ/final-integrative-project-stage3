@@ -17,11 +17,17 @@ npm install
 En segunda instancia crear en la raíz del proyecto un archivo del tipo ".env" con los siguientes valores de variables:
 
 ```
+Para prebas locales de desarrollo
 PORT=3001
 DB_URL_CONNECTION=mongodb+srv://aldoestebanveraz:DSRhuWdnWGKxTcro@eit.07qfkrv.mongodb.net/figures-store
-BASE_URL=http://localhost:3001
 
-MP_ACCESS_TOKEN=TEST-5538553477959174-060418-6d01ed5b493f19711bba6b59ae58ac87-276741812
+# Aca se pone la de Render
+ BASE_URL=http://localhost:3001
+
+# Mercado Pago Acces Token del Vendedor:
+MP_ACCESS_TOKEN=TEST-1274724423450454-060620-75f8e49c25c83f8a089bca059b1f4846-1847555716
+
+ FRONT_URL=http://localhost:3000
 
 ```
 
